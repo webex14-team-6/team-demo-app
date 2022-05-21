@@ -2,17 +2,22 @@
   <h1>Vue メモ</h1>
   <div class="memo-list">
     <ul class="memo-list__container">
-      <li class="memo">
+      <li class="memo" v-for="(memo, index) in memos" :key="index">
         <div class="memo__checkbox">
-          <input type="checkbox" />
+          <input type="checkbox" v-on:click="none" />
         </div>
-        <div class="memo__text">ひき肉を300g買う</div>
-        <button class="memo__delete">削除</button>
+        <div v-bind:class="memo__text">
+          {{ memo.text }}
+        </div>
+        <button class="memo__delete" v-on:click="deletememo">削除</button>
       </li>
     </ul>
     <div class="add-memo-field">
-      <input class="add-memo-field__input" type="text" v-on:click="tuika" />
-      <button class="add-memo-field__button">追加</button>
+      <input class="add-memo-field__input" type="text" v-model="inputmemo" />
+      <button class="add-memo-field__button" v-on:click="addmemo">
+        追加する
+      </button>
+      <button class="all-delete_button" v-on:click="alldelete">全て消す</button>
     </div>
   </div>
 </template>
@@ -20,14 +25,27 @@
 <script>
 export default {
   data() {
-    return{
-      memos:
+    return {
+      inputmemo: "",
+      memos: [{ text: "あいうえお" }, { text: "かきくけこ" }],
     }
   },
-  metod: {
-    tuika:function () {
-
-    }
+  methods: {
+    addmemo: function () {
+      if (this.inputmemo !== "") {
+        this.memos.push({ text: this.inputmemo })
+        this.inputmemo = ""
+      }
+      console.log(this.memos)
+    },
+    deletememo: function (i) {
+      this.memos.splice(i, 1)
+      console.log(this.memos)
+    },
+    alldelete: function () {
+      this.memos.length = 0
+    },
+    none: function () {},
   },
 }
 </script>
