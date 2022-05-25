@@ -4,12 +4,17 @@
     <ul class="memo-list__container">
       <li class="memo" v-for="(memo, index) in memos" :key="index">
         <div class="memo__checkbox">
-          <input type="checkbox" v-on:click="none" />
+          <input type="checkbox" v-model="memo.checkon" />
         </div>
-        <div v-bind:class="memo__text">
+        <div v-if="memo.checkon" class="memo__text memo__text--done">
+          {{ index }}:{{ memo.text }}
+        </div>
+        <div v-else class="memo__text">
           {{ memo.text }}
         </div>
-        <button class="memo__delete" v-on:click="deletememo">削除</button>
+        <button class="memo__delete" v-on:click="deletememo(index)">
+          削除
+        </button>
       </li>
     </ul>
     <div class="add-memo-field">
@@ -33,7 +38,7 @@ export default {
   methods: {
     addmemo: function () {
       if (this.inputmemo !== "") {
-        this.memos.push({ text: this.inputmemo })
+        this.memos.push({ text: this.inputmemo, checkon: "" })
         this.inputmemo = ""
       }
       console.log(this.memos)
@@ -45,7 +50,6 @@ export default {
     alldelete: function () {
       this.memos.length = 0
     },
-    none: function () {},
   },
 }
 </script>
