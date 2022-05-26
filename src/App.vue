@@ -20,7 +20,6 @@ export default {
 
 <style scoped>
 .main-view {
-  padding: 0 2rem;
   width: 100%;
 }
 </style>
