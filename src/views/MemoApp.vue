@@ -1,29 +1,55 @@
 <template>
-  <h1>Vue メモ</h1>
-  <div class="memo-list">
-    <ul class="memo-list__container">
-      <li class="memo" v-for="(memo, index) in memos" :key="index">
-        <div class="memo__checkbox">
+  <h1 class="text-3xl font-bold underline">Vue メモ</h1>
+  <div
+    class="mt-10 p-5 mx-auto max-w-3xl rounded-sm flex-row items-stretch bg-blue-300"
+  >
+    <div class="mt-2 flex justify-center">
+      <input
+        class="p-3 rounded-md border-white w-1/2"
+        type="text"
+        placeholder="メモの内容をここに記入"
+        v-model="inputmemo"
+      />
+      <button
+        class="ml-3 mr-2 p-2 text-white border-2 rounded-full bg-emerald-300 transition hover:bg-emerald-200 duration-300"
+        v-on:click="addmemo"
+      >
+        追加する
+      </button>
+      <button
+        class="p-2 text-white border-2 rounded-full bg-red-400 transition hover:bg-red-300 duration-300"
+        v-on:click="alldelete"
+      >
+        全て消す
+      </button>
+    </div>
+    <ul class="flex flex-col justify-center m-3">
+      <li
+        class="flex justify-between items-center p-1 bg-white rounded-md border-2"
+        v-for="(memo, index) in memos"
+        :key="index"
+      >
+        <div class="px-3">
           <input type="checkbox" v-model="memo.checkon" />
         </div>
-        <div v-if="memo.checkon" class="memo__text memo__text--done">
-          {{ index }}:{{ memo.text }}
+        <div v-if="memo.checkon" class="line-through">
+          {{ memo.text }}:{{ memo.date[0] }}/{{ memo.date[1] }}/{{
+            memo.date[2]
+          }}
         </div>
-        <div v-else class="memo__text">
-          {{ memo.text }}
+        <div v-else class="">
+          {{ memo.text }}:{{ memo.date[0] }}/{{ memo.date[1] }}/{{
+            memo.date[2]
+          }}
         </div>
-        <button class="memo__delete" v-on:click="deletememo(index)">
+        <button
+          class="p-2 border-2 border-black rounded-full hover:bg-red-400"
+          v-on:click="deletememo(index)"
+        >
           削除
         </button>
       </li>
     </ul>
-    <div class="add-memo-field">
-      <input class="add-memo-field__input" type="text" v-model="inputmemo" />
-      <button class="add-memo-field__button" v-on:click="addmemo">
-        追加する
-      </button>
-      <button class="all-delete_button" v-on:click="alldelete">全て消す</button>
-    </div>
   </div>
 </template>
 
@@ -32,13 +58,22 @@ export default {
   data() {
     return {
       inputmemo: "",
-      memos: [{ text: "あいうえお" }, { text: "かきくけこ" }],
+      memos: [],
     }
   },
   methods: {
     addmemo: function () {
+      const nowdate = new Date()
       if (this.inputmemo !== "") {
-        this.memos.push({ text: this.inputmemo, checkon: "" })
+        this.memos.push({
+          text: this.inputmemo,
+          checkon: "",
+          date: [
+            nowdate.getFullYear(),
+            Number(nowdate.getMonth() + 1),
+            nowdate.getDate(),
+          ],
+        })
         this.inputmemo = ""
       }
       console.log(this.memos)
@@ -48,7 +83,10 @@ export default {
       console.log(this.memos)
     },
     alldelete: function () {
-      this.memos.length = 0
+      const kakunin = confirm("ほんとに消しますか？")
+      if (kakunin) {
+        this.memos.length = 0
+      }
     },
   },
 }
@@ -111,9 +149,6 @@ export default {
   gap: 0.5rem;
 }
 
-.add-memo-field__input {
-  padding: 10px;
-}
 .add-memo-field__button {
   padding: 0.5rem 0.5rem;
   border: solid 1px black;
