@@ -1,7 +1,7 @@
 <template>
   <h1>Vue クイズ</h1>
   <div id="quiz-app">
-    <img class="quiz-image" src="@/assets/ganymede.jpeg" alt="クイズイメージ" />
+    <img class="quiz-image" src="@/assets/elizabeth.png" alt="クイズイメージ" />
     <div class="quiz-content">
       <h2 class="quiz-text">Q. {{ quiz.text }}</h2>
       <div class="buttons">
@@ -24,21 +24,19 @@ export default {
     return {
       feedback: "",
       quiz: {
-        text: "この星の名前は何でしょう？",
+        text: "現在のイギリスの女王はエリザベス何世？",
         choices: [
           {
-            text: "ゴリアテ",
-            feedback:
-              "残念！ゴリアテは、旧約聖書に登場するダビデに石で殺される巨人だよ。",
+            text: "１世",
+            feedback: "残念！世界史で有名な大英帝国の女王が１世だよ。",
           },
           {
-            text: "ゼニガメ",
-            feedback:
-              "残念！ゼニガメは、クサガメまたはニホンイシガメの幼体だよ。",
+            text: "２世",
+            feedback: "正解！ちなみに今年で９６歳だよ！",
           },
           {
-            text: "ガニメデ",
-            feedback: "正解！ガニメデは、木星の第三惑星だよ！",
+            text: "３世",
+            feedback: "残念！まだ存在してないよ。",
           },
         ],
       },
@@ -52,7 +50,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #quiz-app {
   width: 1000px;
   height: 500px;
@@ -62,6 +60,10 @@ export default {
   justify-content: space-between;
   align-items: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  text-align: center;
 }
 
 .quiz-image {
@@ -76,6 +78,7 @@ export default {
 }
 
 .quiz-text {
+  font-size: 30px;
   display: inline-block;
   padding-bottom: 10px;
   border-bottom: solid 1px #2c3e50;
