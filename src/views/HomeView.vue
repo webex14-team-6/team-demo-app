@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .home-title {
   text-align: center;
   color: white;
@@ -35,9 +35,9 @@ a {
 
 .links {
   width: 100%;
-  height: 400px;
+  height: 480px;
   margin: auto;
-  padding: 50px 0;
+  padding: 120px 0;
   background-color: #42b983eb;
 }
 
@@ -46,7 +46,7 @@ a {
   justify-content: center;
   align-items: center;
   gap: 80px;
-  margin: 40px 0 30px;
+  margin: 60px 0 20px;
 }
 
 .icon {
