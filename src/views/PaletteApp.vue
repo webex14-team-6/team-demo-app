@@ -3,19 +3,19 @@
   <div class="app">
     <div
       class="palette"
-      style="background-color: rgba(0, 0, 200, 0.5)"
+      style="background-color: rgba(0, 50, 0, 0.5)"
       v-on:mousemove="changeColor"
       v-on:click="pickColor"
       v-bind:style="paletteStyle"
     ></div>
-    <p>rgba( {{ this.red }}, {{ this.green }}, 200, 0.5 )</p>
+    <p>rgba( {{ this.red }}, 50, {{ this.green }}, 0.8 )</p>
     <div class="colors-container">
       <div
         v-for="(color, index) in colors"
         :key="index"
         class="mini-palette"
         v-bind:style="{
-          backgroundColor: `rgba(${color.red}, ${color.green}, 200, 0.5)`,
+          backgroundColor: `rgba(${color.red}, 50, ${color.green}, 0.5)`,
         }"
         v-on:click="showColor(color)"
       ></div>
@@ -59,7 +59,7 @@ export default {
   computed: {
     paletteStyle() {
       return {
-        backgroundColor: `rgba(${this.red}, ${this.green}, 200, 0.5)`,
+        backgroundColor: `rgba(${this.red}, 50, ${this.green}, 0.8)`,
       }
     },
   },
@@ -76,15 +76,23 @@ export default {
 .palette {
   width: 255px;
   height: 255px;
+  border-radius: 3%;
+  box-shadow: 2px 2px 5px #718ca7c9;
 }
 .mini-palette {
   min-width: 60px;
   height: 60px;
+  border-radius: 50%;
+  filter: brightness(110%) saturate(120%);
+  margin: 4px;
 }
+
 .colors-container {
   display: flex;
-  flex-wrap: wrap;
-  width: 300px;
-  padding-top: 8px;
+  flex-wrap: wrap-reverse;
+  width: 410px;
+  padding: 10px;
+  background-color: rgb(233, 194, 170);
+  border-radius: 20px;
 }
 </style>
